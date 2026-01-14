@@ -174,3 +174,26 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+
+.category-item:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.category-item.active {
+    background-color: rgba(67, 97, 238, 0.2);
+    border-left: 4px solid var(--primary-color);
+}
+
+.category-count {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.stats {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    margin-top: 20px;
+}
