@@ -406,3 +406,61 @@ function escapeHtml(text) {
     div.textContent = text;
     return div.innerHTML;
 }
+
+// Export and import functionality (simplified)
+document.getElementById('exportBtn').addEventListener('click', () => {
+    const dataStr = JSON.stringify(snippets, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+    
+    const exportFileDefaultName = 'code-snippets.json';
+    
+    const linkElement = document.createElement('a');
+    linkElement.setAttribute('href', dataUri);
+    linkElement.setAttribute('download', exportFileDefaultName);
+    linkElement.click();
+    
+    showToast('Snippets exported successfully');
+});
+
+document.getElementById('importBtn').addEventListener('click', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    
+    input.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const importedSnippets = JSON.parse(event.target.result);
+                
+                // Add imported snippets with new IDs
+                const maxId = snippets.length > 0 ? Math.max(...snippets.map(s => s.id)) : 0;
+                importedSnippets.forEach((snippet, index) => {
+                    snippet.id = maxId + index + 1;
+                    if (!snippet.createdAt) snippet.createdAt = new Date().toISOString().split('T')[0];
+                });
+                
+                snippets = [...snippets, ...importedSnippets];
+                localStorage.setItem('codeSnippets', JSON.stringify(snippets));
+                
+                renderCategories();
+                renderSnippets();
+                updateStats();
+                
+                showToast(`${importedSnippets.length} snippets imported successfully`);
+            } catch (error) {
+                showToast('Failed to import snippets. Invalid file format.', 'error');
+            }
+        };
+        
+        reader.readAsText(file);
+    });
+    
+    input.click();
+});
+
+// Initialize the app when DOM is loaded
+document.addEventListener('DOMContentLoaded', initApp);
