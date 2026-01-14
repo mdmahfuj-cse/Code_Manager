@@ -154,3 +154,23 @@ header {
     align-items: center;
     gap: 10px;
 }
+
+.sidebar h2 i {
+    font-size: 18px;
+}
+
+.categories-list {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.category-item {
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
