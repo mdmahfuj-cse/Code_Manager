@@ -197,3 +197,27 @@ header {
     padding: 20px;
     margin-top: 20px;
 }
+
+.stats h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: var(--gray-300);
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.content-area {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
