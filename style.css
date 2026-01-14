@@ -221,3 +221,30 @@ header {
     flex-direction: column;
     gap: 30px;
 }
+
+.snippets-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.snippets-header h2 {
+    font-size: 24px;
+    color: var(--light-color);
+}
+
+.search-box {
+    position: relative;
+    width: 300px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 20px 12px 45px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    color: white;
+    font-size: 15px;
+    transition: var(--transition);
+}
