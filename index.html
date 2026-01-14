@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Snippet Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-code"></i>
+                <h1>Code Snippet Manager</h1>
+            </div>
+            <div class="app-controls">
+                <button class="btn btn-secondary" id="importBtn">
+                    <i class="fas fa-file-import"></i> Import
+                </button>
+                <button class="btn btn-secondary" id="exportBtn">
+                    <i class="fas fa-file-export"></i> Export
+                </button>
+                <button class="btn btn-primary" id="addSnippetBtn">
+                    <i class="fas fa-plus"></i> Add Snippet
+                </button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <aside class="sidebar">
+                <h2><i class="fas fa-folder"></i> Categories</h2>
+                <ul class="categories-list" id="categoriesList">
+                    <!-- Categories will be populated by JavaScript -->
+                </ul>
+
+                <div class="stats">
+                    <h3><i class="fas fa-chart-bar"></i> Statistics</h3>
+                    <div class="stat-item">
+                        <span>Total Snippets</span>
+                        <span class="stat-value" id="totalSnippets">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Languages</span>
+                        <span class="stat-value" id="totalLanguages">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Last Added</span>
+                        <span class="stat-value" id="lastAdded">-</span>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="content-area">
+                <div class="snippets-header">
+                    <h2 id="currentCategory">All Snippets</h2>
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search snippets...">
+                    </div>
+                </div>
+
+                <div class="snippets-container" id="snippetsContainer">
+                    <!-- Snippets will be populated by JavaScript -->
+                </div>
+            </main>
+        </div>
+
+        <footer>
+            <p>Code Snippet Manager &copy; 2023 | Store and manage your code snippets efficiently</p>
+        </footer>
+    </div>
+
+    <!-- Add/Edit Snippet Modal -->
+    <div class="modal" id="snippetModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Add New Snippet</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="snippetForm">
+                    <div class="form-group">
+                        <label for="snippetTitle">Title</label>
+                        <input type="text" id="snippetTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="snippetDescription">Description</label>
+                        <textarea id="snippetDescription" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="snippetCategory">Category</label>
+                        <select id="snippetCategory" required>
+                            <!-- Categories will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="snippetLanguage">Programming Language</label>
+                        <select id="snippetLanguage" required>
+                            <option value="javascript">JavaScript</option>
+                            <option value="python">Python</option>
+                            <option value="html">HTML</option>
+                            <option value="css">CSS</option>
+                            <option value="java">Java</option>
+                            <option value="cpp">C++</option>
+                            <option value="php">PHP</option>
+                            <option value="sql">SQL</option>
+                            <option value="typescript">TypeScript</option>
+                            <option value="ruby">Ruby</option>
+                            <option value="bash">Bash/Shell</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="code-editor">
+                        <div class="editor-header">
+                            <span>Code</span>
+                            <select id="codeTheme">
+                                <option value="light">Light Theme</option>
+                                <option value="dark" selected>Dark Theme</option>
+                            </select>
+                        </div>
+                        <div class="editor-body">
+                            <textarea id="snippetCode" placeholder="Paste your code here..." required></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveSnippetBtn">Save Snippet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Snippet Modal -->
+    <div class="modal view-snippet-modal" id="viewSnippetModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="viewSnippetTitle">Snippet Details</h2>
+                <button class="close-modal" id="closeViewModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Description</label>
+                    <div id="viewSnippetDescription" style="background-color: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px;"></div>
+                </div>
+                <div class="form-group">
+                    <label>Category & Language</label>
+                    <div style="display: flex; gap: 20px;">
+                        <div style="flex: 1;">
+                            <div style="background-color: rgba(67, 97, 238, 0.2); color: var(--accent-color); padding: 10px 15px; border-radius: 8px; text-align: center;" id="viewSnippetCategory"></div>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="background-color: rgba(76, 201, 240, 0.2); color: var(--accent-color); padding: 10px 15px; border-radius: 8px; text-align: center;" id="viewSnippetLanguage"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Code</label>
+                    <div style="position: relative;">
+                        <button class="copy-btn" id="copyCodeBtn">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <div class="view-snippet-code" id="viewSnippetCode"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="closeViewBtn">Close</button>
+                <button class="btn btn-primary" id="editSnippetBtn">Edit Snippet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Snippet saved successfully!</span>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
