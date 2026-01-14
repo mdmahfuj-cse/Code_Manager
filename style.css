@@ -291,3 +291,27 @@ header {
     box-shadow: var(--box-shadow);
     border-color: rgba(67, 97, 238, 0.3);
 }
+
+.snippet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.snippet-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.snippet-language {
+    display: inline-block;
+    padding: 5px 12px;
+    background-color: rgba(67, 97, 238, 0.2);
+    color: var(--accent-color);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
