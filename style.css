@@ -582,3 +582,20 @@ header {
 .toast.error {
     background-color: var(--danger-color);
 }
+
+.toast.warning {
+    background-color: var(--warning-color);
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--gray-300);
+    font-size: 14px;
+}
+
+.view-snippet-modal .modal-content {
+    max-width: 900px;
+}
