@@ -415,3 +415,29 @@ header {
     justify-content: space-between;
     align-items: center;
 }
+
+.modal-header h2 {
+    font-size: 24px;
+    color: white;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    color: var(--gray-300);
+    font-size: 24px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.close-modal:hover {
+    color: white;
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
