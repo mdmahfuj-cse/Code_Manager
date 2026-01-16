@@ -470,3 +470,33 @@ header {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
 }
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.code-editor {
+    background-color: #1e1e1e;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.editor-header {
+    background-color: #252526;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+.editor-header select {
+    background-color: #3c3c3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-family: 'Fira Code', monospace;
+}
